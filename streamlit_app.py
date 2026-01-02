@@ -1,151 +1,123 @@
 import streamlit as st
 import pandas as pd
-import math
-from pathlib import Path
+import joblib
+import numpy as np
 
-# Set the title and favicon that appear in the Browser's tab bar.
-st.set_page_config(
-    page_title='GDP dashboard',
-    page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
-)
+# Load the trained model
+model = joblib.load('house_price_model.pkl')
 
-# -----------------------------------------------------------------------------
-# Declare some useful functions.
+# Load the preprocessor
+preprocessor = joblib.load('preprocessor.pkl')
 
-@st.cache_data
-def get_gdp_data():
-    """Grab GDP data from a CSV file.
+# Define the input fields
+st.title('House Price Prediction')
 
-    This uses caching to avoid having to read the file every time. If we were
-    reading from an HTTP endpoint instead of a file, it's a good idea to set
-    a maximum age to the cache with the TTL argument: @st.cache_data(ttl='1d')
-    """
+# Input fields
+# Here, more complex features (strings/categorical) should be made into st.selectbox etc.
 
-    # Instead of a CSV on disk, you could read from an HTTP endpoint here too.
-    DATA_FILENAME = Path(__file__).parent/'data/gdp_data.csv'
-    raw_gdp_df = pd.read_csv(DATA_FILENAME)
+# Example numeric fields for simplicity:
+lot_area = st.number_input('Lot Area', value=5000)
+overall_qual = st.number_input('Overall Qual', min_value=1, max_value=10, value=5)
+year_built = st.number_input('Year Built', value=1990)
+total_bsmt_sf = st.number_input('Total Bsmt SF', value=1000)
+first_flr_sf = st.number_input('1st Flr SF', value=1000)
+full_bath = st.number_input('Full Bath', value=2)
+gr_liv_area = st.number_input('Gr Liv Area', value=1500)
+garage_cars = st.number_input('Garage Cars', value=1)
+# You need to add more fields for all the mentioned features in a similar way here...
 
-    MIN_YEAR = 1960
-    MAX_YEAR = 2022
+# Create a DataFrame for the input features
+# Make sure the names of input fields match the ones expected by the preprocessor
+input_data = pd.DataFrame({
+    'Central Air': ['Y'],  # Example of default input for categorical feature
+    'House Style': ['1Story'],  # Just examples for missing fields
+    'Bsmt Full Bath': [1],
+    'Kitchen Qual': ['TA'],
+    'Bsmt Qual': ['TA'],
+    'Exter Cond': ['TA'],
+    'Neighborhood': ['NAmes'],
+    'Garage Qual': ['TA'],
+    'Bedroom AbvGr': [3],
+    'MS Zoning': ['RL'],
+    'Foundation': ['PConc'],
+    'Misc Val': [0],
+    'Fireplaces': [0],
+    'Bsmt Unf SF': [400],
+    'Low Qual Fin SF': [0],
+    'Land Contour': ['Lvl'],
+    'Bldg Type': ['1Fam'],
+    'Garage Cond': ['TA'],
+    'Bsmt Cond': ['TA'],
+    'Alley': ['NA'],
+    'Condition 2': ['Norm'],
+    'Condition 1': ['Norm'],
+    'Wood Deck SF': [0],
+    'Overall Cond': [5],
+    'Lot Config': ['Inside'],
+    'Screen Porch': [0],
+    'Lot Shape': ['Reg'],
+    '3Ssn Porch': [0],
+    'Fence': ['NA'],
+    'Exterior 1st': ['VinylSd'],
+    'Land Slope': ['Gtl'],
+    'Heating QC': ['Ex'],
+    'Street': ['Pave'],
+    'Utilities': ['AllPub'],
+    'MS SubClass': [20],
+    'Exterior 2nd': ['VinylSd'],
+    'Roof Style': ['Gable'],
+    'Open Porch SF': [20],
+    'Bsmt Exposure': ['No'],
+    'Kitchen AbvGr': [1],
+    'Paved Drive': ['Y'],
+    'Year Remod/Add': [2000],
+    'Garage Area': [500],
+    'Pool QC': ['NA'],
+    'Electrical': ['SBrkr'],
+    'Roof Matl': ['CompShg'],
+    'Sale Condition': ['Normal'],
+    'Mo Sold': [6],
+    'Misc Feature': ['NA'],
+    'Bsmt Half Bath': [0],
+    'Sale Type': ['WD'],
+    'Half Bath': [1],
+    'Garage Type': ['Attchd'],
+    'Heating': ['GasA'],
+    'BsmtFin SF 1': [500],
+    'Yr Sold': [2010],
+    'Functional': ['Typ'],
+    'Pool Area': [0],
+    'Exter Qual': ['TA'],
+    'Garage Finish': ['Unf'],
+    'Mas Vnr Type': ['None'],
+    'Mas Vnr Area': [0],
+    'Garage Yr Blt': [1990],
+    'Enclosed Porch': [0],
+    'TotRms AbvGrd': [6],
+    'Order': [1],
+    'Fireplace Qu': ['NA'],
+    'BsmtFin Type 2': ['NA'],
+    'PID': [0],  # Note this should be handled appropriately as it may not be in preprocessing
+    'BsmtFin Type 1': ['GLQ'],
+    'Lot Frontage': [60],
+    'BsmtFin SF 2': [0],
+    '2nd Flr SF': [0],
 
-    # The data above has columns like:
-    # - Country Name
-    # - Country Code
-    # - [Stuff I don't care about]
-    # - GDP for 1960
-    # - GDP for 1961
-    # - GDP for 1962
-    # - ...
-    # - GDP for 2022
-    #
-    # ...but I want this instead:
-    # - Country Name
-    # - Country Code
-    # - Year
-    # - GDP
-    #
-    # So let's pivot all those year-columns into two: Year and GDP
-    gdp_df = raw_gdp_df.melt(
-        ['Country Code'],
-        [str(x) for x in range(MIN_YEAR, MAX_YEAR + 1)],
-        'Year',
-        'GDP',
-    )
+    # Features defined by the user
+    'Lot Area': [lot_area],
+    'Overall Qual': [overall_qual],
+    'Year Built': [year_built],
+    'Total Bsmt SF': [total_bsmt_sf],
+    '1st Flr SF': [first_flr_sf],
+    'Full Bath': [full_bath],
+    'Gr Liv Area': [gr_liv_area],
+    'Garage Cars': [garage_cars],
+})
 
-    # Convert years from string to integers
-    gdp_df['Year'] = pd.to_numeric(gdp_df['Year'])
+# Preprocess the input features
+input_features_preprocessed = preprocessor.transform(input_data)
 
-    return gdp_df
-
-gdp_df = get_gdp_data()
-
-# -----------------------------------------------------------------------------
-# Draw the actual page
-
-# Set the title that appears at the top of the page.
-'''
-# :earth_americas: GDP dashboard
-
-Browse GDP data from the [World Bank Open Data](https://data.worldbank.org/) website. As you'll
-notice, the data only goes to 2022 right now, and datapoints for certain years are often missing.
-But it's otherwise a great (and did I mention _free_?) source of data.
-'''
-
-# Add some spacing
-''
-''
-
-min_value = gdp_df['Year'].min()
-max_value = gdp_df['Year'].max()
-
-from_year, to_year = st.slider(
-    'Which years are you interested in?',
-    min_value=min_value,
-    max_value=max_value,
-    value=[min_value, max_value])
-
-countries = gdp_df['Country Code'].unique()
-
-if not len(countries):
-    st.warning("Select at least one country")
-
-selected_countries = st.multiselect(
-    'Which countries would you like to view?',
-    countries,
-    ['DEU', 'FRA', 'GBR', 'BRA', 'MEX', 'JPN'])
-
-''
-''
-''
-
-# Filter the data
-filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
-    & (gdp_df['Year'] <= to_year)
-    & (from_year <= gdp_df['Year'])
-]
-
-st.header('GDP over time', divider='gray')
-
-''
-
-st.line_chart(
-    filtered_gdp_df,
-    x='Year',
-    y='GDP',
-    color='Country Code',
-)
-
-''
-''
-
-
-first_year = gdp_df[gdp_df['Year'] == from_year]
-last_year = gdp_df[gdp_df['Year'] == to_year]
-
-st.header(f'GDP in {to_year}', divider='gray')
-
-''
-
-cols = st.columns(4)
-
-for i, country in enumerate(selected_countries):
-    col = cols[i % len(cols)]
-
-    with col:
-        first_gdp = first_year[first_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-        last_gdp = last_year[last_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-
-        if math.isnan(first_gdp):
-            growth = 'n/a'
-            delta_color = 'off'
-        else:
-            growth = f'{last_gdp / first_gdp:,.2f}x'
-            delta_color = 'normal'
-
-        st.metric(
-            label=f'{country} GDP',
-            value=f'{last_gdp:,.0f}B',
-            delta=growth,
-            delta_color=delta_color
-        )
+# Predict and display the output
+if st.button('Predict'):
+    prediction = model.predict(input_features_preprocessed)
+    st.write(f'Predicted House Price: ${prediction[0]:,.2f}')
