@@ -33,6 +33,12 @@
 				},
 				{
 					"name": "JoinAllPersonLocClient"
+				},
+				{
+					"name": "FilterActive"
+				},
+				{
+					"name": "ColmunFilter"
 				}
 			],
 			"scriptLines": [
@@ -82,7 +88,29 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> JoinAllPersonLocClient"
+				"     broadcast: 'auto')~> JoinAllPersonLocClient",
+				"JoinAllPersonLocClient filter(ACTIVE_FLAG == 'Y') ~> FilterActive",
+				"FilterActive select(mapColumn(",
+				"          PERSON_ID,",
+				"          FIRST_NAME,",
+				"          LAST_NAME,",
+				"          AGE,",
+				"          JOB,",
+				"          HIREDATE,",
+				"          SALARY,",
+				"          LOCATION_ID = SrcPersons@LOCATION_ID,",
+				"          CLIENT_ID = SrcPersons@CLIENT_ID,",
+				"          ACTIVE_FLAG,",
+				"          STATE_CODE,",
+				"          STATE_NAME,",
+				"          CITY,",
+				"          ZIP_CODE,",
+				"          CLIENT_CODE,",
+				"          CLIENT_NAME,",
+				"          MANAGER_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> ColmunFilter"
 			]
 		}
 	}
