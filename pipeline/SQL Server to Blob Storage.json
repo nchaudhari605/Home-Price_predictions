@@ -30,10 +30,7 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": {
-								"value": "@concat('Sales', formatDateTime(utcNow(), 'yyyyMMdd_HHmmss'), '.csv')\n",
-								"type": "Expression"
-							}
+							"fileExtension": "Sales.csv"
 						}
 					},
 					"enableStaging": false,
