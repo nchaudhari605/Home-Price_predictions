@@ -1,5 +1,5 @@
 {
-	"name": "PersonLocationClient_Src_Dataset",
+	"name": "PersonLocationClientSrcDataset",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
