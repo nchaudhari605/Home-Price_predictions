@@ -1,0 +1,27 @@
+{
+	"name": "targetPLC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoragefor SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('PersonLocationClient', formatDateTime(utcNow(), 'yyyyMMdd'), '.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "PersonLocationClient",
+				"container": "ssms-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
