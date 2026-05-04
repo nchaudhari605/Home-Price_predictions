@@ -1,0 +1,22 @@
+{
+	"name": "salesfile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoragefor SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "ssms-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
