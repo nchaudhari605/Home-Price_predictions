@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "PersonLocationCleint",
-				"type": "Copy",
+				"name": "PersonLocationClients",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,20 +15,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT \n    P.PERSON_ID,\n    P.FIRST_NAME,\n    P.LAST_NAME,\n    P.AGE,\n    P.JOB,\n    P.HIREDATE,\n    P.SALARY,\n    L.STATE_CODE,\n    L.STATE_NAME,\n    L.CITY,\n    L.ZIP_CODE,\n    C.CLIENT_CODE,\n    C.CLIENT_NAME,\n    C.MANAGER_NAME,\n    P.ACTIVE_FLAG\nFROM PERSON P\nLEFT JOIN LOCATIONS L ON P.LOCATION_ID = L.LOCATION_ID\nLEFT JOIN CLIENTS C ON P.CLIENT_ID = C.CLIENT_ID\nWHERE P.ACTIVE_FLAG = 'Y';",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
 					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "Employees",
-						"type": "DatasetReference"
-					}
-				]
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []
