@@ -10,6 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('sale_', formatDateTime(utcNow(), 'yyyyMMdd'), '.csv')\n",
+					"type": "Expression"
+				},
 				"container": "ssms-data"
 			},
 			"columnDelimiter": "|",
