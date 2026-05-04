@@ -1,0 +1,63 @@
+{
+	"name": "Person",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "PERSON_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "LAST_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "AGE",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "JOB",
+				"type": "varchar"
+			},
+			{
+				"name": "HIREDATE",
+				"type": "date"
+			},
+			{
+				"name": "SALARY",
+				"type": "decimal",
+				"precision": 7,
+				"scale": 2
+			},
+			{
+				"name": "LOCATION_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CLIENT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACTIVE_FLAG",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PERSON"
+		}
+	}
+}
