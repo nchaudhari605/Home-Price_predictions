@@ -27,7 +27,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "JoinPersonLocation"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          PERSON_ID as integer,",
@@ -65,7 +69,12 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> SrcClient"
+				"     format: 'table') ~> SrcClient",
+				"SrcPersons, SrcLocations join(ERROR_FUNCTION('') == SrcLocations@LOCATION_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinPersonLocation"
 			]
 		}
 	}
