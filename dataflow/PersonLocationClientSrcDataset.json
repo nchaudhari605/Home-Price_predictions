@@ -39,6 +39,9 @@
 				},
 				{
 					"name": "ColmunFilter"
+				},
+				{
+					"name": "AddCustomColumns"
 				}
 			],
 			"scriptLines": [
@@ -110,7 +113,11 @@
 				"          MANAGER_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> ColmunFilter"
+				"     skipDuplicateMapOutputs: true) ~> ColmunFilter",
+				"ColmunFilter derive(FULLNAME = concat(FIRST_NAME,' ,', LAST_NAME ),",
+				"          BONUS = SALARY*0.1,",
+				"          EMP_TYPE = iif(HIREDATE < toDate('2018-01-01'), 'PERMANENT', 'CONTRACTOR')\r",
+				") ~> AddCustomColumns"
 			]
 		}
 	}
