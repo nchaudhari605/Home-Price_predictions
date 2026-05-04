@@ -26,7 +26,19 @@
 					"name": "SrcClient"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "targetPLC",
+						"type": "DatasetReference"
+					},
+					"name": "Target",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStoragefor SSMS",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
 			"transformations": [
 				{
 					"name": "JoinPersonLocation"
@@ -116,8 +128,12 @@
 				"     skipDuplicateMapOutputs: true) ~> ColmunFilter",
 				"ColmunFilter derive(FULLNAME = concat(FIRST_NAME,' ,', LAST_NAME ),",
 				"          BONUS = SALARY*0.1,",
-				"          EMP_TYPE = iif(HIREDATE < toDate('2018-01-01'), 'PERMANENT', 'CONTRACTOR')\r",
-				") ~> AddCustomColumns"
+				"          EMP_TYPE = iif(HIREDATE < toDate('2018-01-01'), 'PERMANENT', 'CONTRACTOR')) ~> AddCustomColumns",
+				"AddCustomColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> Target"
 			]
 		}
 	}
