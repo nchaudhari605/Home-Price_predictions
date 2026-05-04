@@ -1,0 +1,88 @@
+{
+	"name": "Employees",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "EMP_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EMP_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_AGE",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EMP_JOB",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_JOINDATE",
+				"type": "date"
+			},
+			{
+				"name": "EMP_SAL",
+				"type": "decimal",
+				"precision": 7,
+				"scale": 2
+			},
+			{
+				"name": "EMP_BONUS",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 3
+			},
+			{
+				"name": "EMP_STATE_CODE",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_STATE_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_CITY",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_ZIP_CODE",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EMP_CLIENT_CODE",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_CLIENT_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_FLG",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_TYPE",
+				"type": "varchar"
+			},
+			{
+				"name": "EMP_MANAGER_NAME",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EMPLOYEES"
+		}
+	}
+}
