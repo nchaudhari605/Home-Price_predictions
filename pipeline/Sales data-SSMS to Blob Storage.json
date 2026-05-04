@@ -1,5 +1,5 @@
 {
-	"name": "SQL Server to Blob Storage",
+	"name": "Sales data-SSMS to Blob Storage",
 	"properties": {
 		"activities": [
 			{
