@@ -1,0 +1,34 @@
+{
+	"name": "Clients",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "CLIENT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CLIENT_CODE",
+				"type": "varchar"
+			},
+			{
+				"name": "CLIENT_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "MANAGER_NAME",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CLIENTS"
+		}
+	}
+}
