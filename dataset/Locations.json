@@ -1,0 +1,39 @@
+{
+	"name": "Locations",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "LOCATION_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "STATE_CODE",
+				"type": "varchar"
+			},
+			{
+				"name": "STATE_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "CITY",
+				"type": "varchar"
+			},
+			{
+				"name": "ZIP_CODE",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "LOCATIONS"
+		}
+	}
+}
