@@ -1,0 +1,6 @@
+{
+	"name": "SQLServerRruntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
