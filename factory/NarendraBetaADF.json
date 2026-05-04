@@ -1,0 +1,15 @@
+{
+	"name": "NarendraBetaADF",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3a68bbc8-5d69-4f84-a4a7-5f543c9fe419",
+		"tenantId": "87eb37b2-939e-4e9b-81c5-b9bee5ea6c2a"
+	}
+}
