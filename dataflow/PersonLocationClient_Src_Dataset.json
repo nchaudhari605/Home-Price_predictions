@@ -30,6 +30,9 @@
 			"transformations": [
 				{
 					"name": "JoinPersonLocation"
+				},
+				{
+					"name": "JoinAllPersonLocClient"
 				}
 			],
 			"scriptLines": [
@@ -74,7 +77,12 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> JoinPersonLocation"
+				"     broadcast: 'auto')~> JoinPersonLocation",
+				"JoinPersonLocation, SrcClient join(SrcPersons@CLIENT_ID == SrcClient@CLIENT_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinAllPersonLocClient"
 			]
 		}
 	}
