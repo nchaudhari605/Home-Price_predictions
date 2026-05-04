@@ -1,0 +1,21 @@
+{
+	"name": "SSMS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "localhost",
+			"database": "home",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "Windows",
+			"userName": "LAPTOP‑PV9R8IRH\\naren",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3NzBkMjM0Zi1jNTZmLTQ4YTctODZjZC03NTk3YTNkMTQ4MzAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SQLServerRruntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
