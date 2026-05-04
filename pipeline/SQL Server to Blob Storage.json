@@ -30,7 +30,10 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": {
+								"value": "@concat('Sales', formatDateTime(utcNow(), 'yyyyMMdd_HHmmss'), '.csv')\n",
+								"type": "Expression"
+							}
 						}
 					},
 					"enableStaging": false,
@@ -44,9 +47,9 @@
 									"physicalType": "date"
 								},
 								"sink": {
+									"name": "Sale_date",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 1
+									"physicalType": "String"
 								}
 							},
 							{
@@ -56,9 +59,9 @@
 									"physicalType": "int"
 								},
 								"sink": {
+									"name": "sale",
 									"type": "String",
-									"physicalType": "String",
-									"ordinal": 2
+									"physicalType": "String"
 								}
 							}
 						],
