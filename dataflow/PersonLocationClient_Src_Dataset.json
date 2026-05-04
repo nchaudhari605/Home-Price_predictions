@@ -70,7 +70,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> SrcClient",
-				"SrcPersons, SrcLocations join(ERROR_FUNCTION('') == SrcLocations@LOCATION_ID,",
+				"SrcPersons, SrcLocations join(PERSON_ID == SrcLocations@LOCATION_ID,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
