@@ -17,9 +17,9 @@
 				"folderPath": "PersonLocationClient",
 				"container": "ssms-data"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"escapeChar": "\\",
-			"firstRowAsHeader": false,
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": []
