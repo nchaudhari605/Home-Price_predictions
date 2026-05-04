@@ -1,0 +1,72 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Person",
+						"type": "DatasetReference"
+					},
+					"name": "SrcPersons"
+				},
+				{
+					"dataset": {
+						"referenceName": "Locations",
+						"type": "DatasetReference"
+					},
+					"name": "SrcLocations"
+				},
+				{
+					"dataset": {
+						"referenceName": "Clients",
+						"type": "DatasetReference"
+					},
+					"name": "SrcClient"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          PERSON_ID as integer,",
+				"          FIRST_NAME as string,",
+				"          LAST_NAME as string,",
+				"          AGE as integer,",
+				"          JOB as string,",
+				"          HIREDATE as date,",
+				"          SALARY as decimal(7,2),",
+				"          LOCATION_ID as integer,",
+				"          CLIENT_ID as integer,",
+				"          ACTIVE_FLAG as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SrcPersons",
+				"source(output(",
+				"          LOCATION_ID as integer,",
+				"          STATE_CODE as string,",
+				"          STATE_NAME as string,",
+				"          CITY as string,",
+				"          ZIP_CODE as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SrcLocations",
+				"source(output(",
+				"          CLIENT_ID as integer,",
+				"          CLIENT_CODE as string,",
+				"          CLIENT_NAME as string,",
+				"          MANAGER_NAME as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> SrcClient"
+			]
+		}
+	}
+}
