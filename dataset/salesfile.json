@@ -12,7 +12,7 @@
 				"type": "AzureBlobStorageLocation",
 				"container": "ssms-data"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
