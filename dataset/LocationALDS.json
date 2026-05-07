@@ -10,10 +10,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('Location_', formatDateTime(utcNow(), 'yyyyMMdd'), '.csv')\n",
+					"type": "Expression"
+				},
 				"folderPath": "PersonLocationClient",
 				"container": "ssms-data"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
