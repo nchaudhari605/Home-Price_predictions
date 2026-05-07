@@ -1,0 +1,29 @@
+{
+	"name": "PersonADLS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoragefor SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "@concat('Persons_', formatDateTime(utcNow(), 'yyyyMMdd'), '.csv')",
+				"folderPath": "PersonLocationClient",
+				"container": "ssms-data"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CLIENT_ID|CLIENT_CODE|CLIENT_NAME|MANAGER_NAME",
+				"type": "String"
+			}
+		]
+	}
+}
