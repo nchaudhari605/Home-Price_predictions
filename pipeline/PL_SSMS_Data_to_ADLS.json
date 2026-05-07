@@ -214,7 +214,7 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": ".csv"
 						}
 					},
 					"enableStaging": false,
@@ -223,92 +223,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "PERSON_ID",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "PERSON_ID",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "FIRST_NAME",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "FIRST_NAME",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "LAST_NAME",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "LAST_NAME",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "AGE",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "AGE",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "JOB",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "JOB",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "HIREDATE",
-									"type": "Date",
-									"physicalType": "date"
-								},
-								"sink": {
-									"name": "HIREDATE",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "SALARY",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 7
-								},
-								"sink": {
-									"name": "SALARY",
-									"type": "String",
-									"physicalType": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "LOCATION_ID",
 									"type": "Int32",
 									"physicalType": "int"
@@ -321,24 +235,48 @@
 							},
 							{
 								"source": {
-									"name": "CLIENT_ID",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "STATE_CODE",
+									"type": "String",
+									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "CLIENT_ID",
+									"name": "STATE_CODE",
 									"type": "String",
 									"physicalType": "String"
 								}
 							},
 							{
 								"source": {
-									"name": "ACTIVE_FLAG",
+									"name": "STATE_NAME",
 									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "ACTIVE_FLAG",
+									"name": "STATE_NAME",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CITY",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CITY",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ZIP_CODE",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ZIP_CODE",
 									"type": "String",
 									"physicalType": "String"
 								}
@@ -353,13 +291,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Person",
+						"referenceName": "Locations",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "PersonADLS",
+						"referenceName": "LocationALDS",
 						"type": "DatasetReference"
 					}
 				]

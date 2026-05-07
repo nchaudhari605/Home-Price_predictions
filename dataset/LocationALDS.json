@@ -1,0 +1,23 @@
+{
+	"name": "LocationALDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoragefor SSMS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "PersonLocationClient",
+				"container": "ssms-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
