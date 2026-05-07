@@ -183,8 +183,6 @@
 			{
 				"name": "Location",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Persons",
@@ -307,8 +305,6 @@
 			{
 				"name": "Clients",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Location",
