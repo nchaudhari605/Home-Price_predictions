@@ -183,14 +183,7 @@
 			{
 				"name": "Location",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Persons",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -305,14 +298,7 @@
 			{
 				"name": "Clients",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Location",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
